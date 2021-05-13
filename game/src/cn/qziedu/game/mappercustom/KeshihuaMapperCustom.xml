@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.qziedu.game.mappercustom.KeshihuaMapperCustom">
+
+	<!-- 发布赛事次数前十 -->
+  <select id="selectFabuinfoJubancishu"  resultType="cn.qziedu.game.pojoCustom.Keshihua">
+  		select user.email,count(fabuinfo.buildid) as count from user,fabuinfo 
+  		where user.id=fabuinfo.userid  
+  		group by fabuinfo.userid
+  		order by  count desc
+		limit 0,10
+  </select>
+  
+  <!-- 每人获胜次数统计 -->
+  <select id="selectBaominginfowinnum" resultType="cn.qziedu.game.pojoCustom.Keshihua">
+  	select user.email,sum(numwin) as count from baominginfo left join user on user.id=baominginfo.emailid  group by emailid
+  </select>
+  
+  <!-- 获胜总次数最大 -->
+  <select id="selectBaominginfowinnumMax" resultType="cn.qziedu.game.pojoCustom.Keshihua">
+  	select userinfo.name as email,sum(numwin) as count from baominginfo left join userinfo 
+	on userinfo.emailid=baominginfo.emailid  
+	group by baominginfo.emailid 
+	order by count desc
+	limit 0,1
+  </select>
+  <!-- 报名数量最多 -->
+  <select id="selectBaominginfobaomingMax" resultType="cn.qziedu.game.pojoCustom.Keshihua">
+  	select userinfo.name as email,count(baominginfo.emailid) as count from baominginfo left join userinfo 
+	on userinfo.emailid=baominginfo.emailid  
+	group by baominginfo.emailid 
+	order by count desc
+ 	limit 0,1
+  </select>
+  
+  <!-- 普通用户总数 -->
+  <select id="selectPutongUserNumber" resultType="java.lang.Integer">
+  	select count(id) from user where user.quanxian="普通用户"
+  </select>
+  
+  <!-- 店铺发布赛事最多 -->
+  <select id="selectFabugameMax" resultType="cn.qziedu.game.pojoCustom.Keshihua">
+  	select dpinfo.dpname as email, count(fabuinfo.gamename) as count  
+	from fabuinfo  left join  dpinfo on fabuinfo.userid=dpinfo.emailid 
+	group by fabuinfo.userid order by count desc
+	limit 0,1
+  </select>
+  
+  <!-- 店铺发布总奖金最多 -->
+  <select id="selectFabumoneyMax" resultType="cn.qziedu.game.pojoCustom.Keshihua">
+  	select dpinfo.dpname as email, sum(fabuinfo.money) as count  
+	from fabuinfo  left join  dpinfo on fabuinfo.userid=dpinfo.emailid 
+	group by fabuinfo.userid order by count desc
+	limit 0,1
+  </select>
+  
+  <!-- 总发布赛事总数 -->
+  <select id="selectFabuallNumber" resultType="java.lang.Integer">
+  	select count(id) from fabuinfo
+  </select>
+  
+  <!-- 获胜总次数前5 -->
+  <select id="selectBaominginfowinnumpaihang" resultType="cn.qziedu.game.pojoCustom.Keshihua">
+  	select userinfo.name as email,sum(numwin) as count from baominginfo left join userinfo 
+	on userinfo.emailid=baominginfo.emailid  
+	group by baominginfo.emailid 
+	order by count desc
+	limit 0,5
+  </select>
+  
+  <!-- 举办竞赛次数前5 -->
+  <select id="selectFabuinfoNumpaihang" resultType="cn.qziedu.game.pojoCustom.Keshihua">
+  	select dpinfo.dpname as email,count(fabuinfo.gamename) as count from fabuinfo left join dpinfo 
+	on fabuinfo.userid=dpinfo.emailid  
+	group by fabuinfo.userid 
+	order by count desc
+	limit  0,5
+  </select>
+  
+  <!-- 轮播 -->
+  <select id="lunbo" resultType="cn.qziedu.game.pojoCustom.Lunbo">
+  	select userinfo.name as name,count(baominginfo.emailid) as csnum,sum(numwin) as winnum
+	from baominginfo left join userinfo on baominginfo.emailid=userinfo.emailid
+	group by baominginfo.emailid
+  </select>
+  
+  
+</mapper>

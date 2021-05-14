@@ -24,7 +24,7 @@ public interface ZuduiinfoService {
 	List<Zuduiinfo> selectzuduiinfoByWinnum(int fabuinfoid,int winnum);
 	
 	//查询该竞赛获胜次数的最大值
-	int selectZuduiinfoReturnMaxwinnum(int fabuinfoid);
+	Integer selectZuduiinfoReturnMaxwinnum(int fabuinfoid);
 	
 	//查询排行榜
 	List<Zuduiinfo> selectZuduiinfoPaihan(int fabuinfoid);

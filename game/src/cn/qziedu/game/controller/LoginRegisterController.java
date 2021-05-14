@@ -172,7 +172,9 @@ public class LoginRegisterController {
 		Msg msg=null;
 		String verifyCode=String.valueOf(RandomUtil.getRandNum());
 		String content="邮箱验证码:"+verifyCode;
+		//根据权限和邮箱查找用户
 		List<User> list=userService.findUserByEmail(quanxian, email);
+		//判断用户是否存在
 		if(list.size()>0) {
 			try {
 				MailUtil.sendMailText("荣耀电子竞技系统注册验证码：",content, email);

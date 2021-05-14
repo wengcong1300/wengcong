@@ -73,11 +73,41 @@
 		                    	</c:if>
 	                        </c:forEach>
 	                    </td>
-						<td>${zuduiinfo.emailid1}</td>
-						<td>${zuduiinfo.emailid2}</td>
-						<td>${zuduiinfo.emailid3}</td>
-						<td>${zuduiinfo.emailid4}</td>
-						<td>${zuduiinfo.emailid5}</td>
+						<td>
+							<c:forEach items="${userinfo}" var="userinfo">
+		                    	<c:if test="${userinfo.emailid==zuduiinfo.emailid1 }">
+		                    		 ${userinfo.name}
+		                    	</c:if>
+	                        </c:forEach>
+						</td>
+						<td>
+							<c:forEach items="${userinfo}" var="userinfo">
+		                    	<c:if test="${userinfo.emailid==zuduiinfo.emailid2 }">
+		                    		 ${userinfo.name}
+		                    	</c:if>
+	                        </c:forEach>
+	                    </td>
+						<td>
+							<c:forEach items="${userinfo}" var="userinfo">
+		                    	<c:if test="${userinfo.emailid==zuduiinfo.emailid3 }">
+		                    		 ${userinfo.name}
+		                    	</c:if>
+	                        </c:forEach>
+	                    </td>
+						<td>
+							<c:forEach items="${userinfo}" var="userinfo">
+		                    	<c:if test="${userinfo.emailid==zuduiinfo.emailid4 }">
+		                    		 ${userinfo.name}
+		                    	</c:if>
+	                        </c:forEach>
+	                    </td>
+						<td>
+							<c:forEach items="${userinfo}" var="userinfo">
+		                    	<c:if test="${userinfo.emailid==zuduiinfo.emailid5 }">
+		                    		 ${userinfo.name}
+		                    	</c:if>
+	                        </c:forEach>
+	                    </td>
                         
                     </tr>
                     </c:forEach>

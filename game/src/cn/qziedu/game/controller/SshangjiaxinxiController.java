@@ -126,6 +126,10 @@ public class SshangjiaxinxiController {
 				msg.setMessage("添加失败,未选择头像");
 			}
 			else {
+				//封装上传文件位置的全路径
+		        File targetFile = new File(filePath,filename); 
+		        //把本地文件上传到封装上传文件位置的全路径
+		        file.transferTo(targetFile);
 				// 把图片的相对路径保存至数据库
 				sqlPath = "/imgs/" + filename;
 				dpinfo.setTouxiang(sqlPath);

@@ -74,7 +74,7 @@ public class ZuduiinfoServiceImpl implements ZuduiinfoService{
 
 	//返回查询获胜次数的最大值
 	@Override
-	public int selectZuduiinfoReturnMaxwinnum(int fabuinfoid) {
+	public Integer selectZuduiinfoReturnMaxwinnum(int fabuinfoid) {
 		
 		return zuduiinfoMapperCustom.selectZuduiinfoReturnWinnum(fabuinfoid);
 	}

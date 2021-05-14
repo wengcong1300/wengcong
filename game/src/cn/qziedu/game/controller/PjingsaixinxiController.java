@@ -198,8 +198,10 @@ public class PjingsaixinxiController {
 	public String selectbisaiinfopaihang(Model model,int fabuinfoid) {
 		List<Zuduiinfo> zuduiinfo=zuduiinfoService.selectZuduiinfoPaihan(fabuinfoid);
 		List<Fabuinfo> fabuinfo=fabuinfoService.selectFabuinfo();
+		List<Userinfo> userinfo=userinfoService.selectUserinfoAll();
 		model.addAttribute("zuduiinfo", zuduiinfo);
 		model.addAttribute("fabuinfo", fabuinfo);
+		model.addAttribute("userinfo", userinfo);
 		model.addAttribute("count", zuduiinfo.size());
 		return "index/indexputonuser/jingsaixinxiguanli/selectgameoverpaihang";
 	}

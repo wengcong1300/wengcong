@@ -169,15 +169,17 @@ public class SjingsaifabuController {
 		List<Fabuinfo> list=fabuinfoService.selectFabuinfoByUserid(userid);
 		int n=1;
 		Fabuinfo f=fabuinfoService.selectFabuinfoByid(id);
+		//判断比赛开始时间是否在系统时间前2天
 		if(f.getTime3().before(new Date(datetime.getTime()-(long)2*60*60*1000))) {
 			msg=new Msg();
 			msg.setCode(-1);
 			msg.setMessage("修改失败，注意两天内竞赛项目将举行，无法修改");
 		}
 		else {
-			for(Fabuinfo fb:list) {
-				if(id!=fb.getId()) {
-					if(sdf.parse(time4).before(new Date(fb.getTime3().getTime()-(long)5*60*60*1000))||sdf.parse(time3).after(new Date(fb.getTime4().getTime()+(long)5*60*60*1000))) {
+			for(int i=0;i<list.size();i++) {
+				//排除选中的竞赛
+				if(id!=list.get(i).getId()) {
+					if(sdf.parse(time4).before(new Date(list.get(i).getTime3().getTime()-(long)5*60*60*1000))||sdf.parse(time3).after(new Date(list.get(i).getTime4().getTime()+(long)5*60*60*1000))) {
 					}
 					else {
 						n=0;
@@ -185,7 +187,7 @@ public class SjingsaifabuController {
 					}
 				}
 			}
-			if(datetime.before(sdf.parse(time1))&&n==1&&sdf.parse(time1).before(new Date(sdf.parse(time2).getTime()-(long)2*24*60*60*1000))
+			if(n==1&&sdf.parse(time1).before(new Date(sdf.parse(time2).getTime()-(long)2*24*60*60*1000))
 					&&sdf.parse(time2).before(new Date(sdf.parse(time3).getTime()-(long)3*24*60*60*1000))
 					&&sdf.parse(time3).before(new Date(sdf.parse(time4).getTime()-(long)2*24*60*60*1000))) {
 				Fabuinfo fabuinfo=new Fabuinfo();
